@@ -14,5 +14,4 @@ docker tag $imagename:latest $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo
 
 docker push $Aws_account_id.dkr.ecr.region.amazonaws.com/$Repo_name_for_ecr
 
-
 # To push an image to the Amazon ECR repository, we need to authenticate the Docker client to the registry. Each registry requires its own authentication token. To proceed with the authentication, we would run a get-login-password command in the CLI to retrieve the token and then pass it to the docker login command.
