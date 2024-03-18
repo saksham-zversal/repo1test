@@ -6,8 +6,10 @@ on:
     paths-ignore:
       - 'README.md'
   workflow_dispatch:
-env:
-  AWS_REGION: us-east-2
+    
+defaults:
+  run:
+    working-directory: ./myfirstcodebase
 permissions:
   id-token: write
   contents: read
