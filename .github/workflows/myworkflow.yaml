@@ -2,43 +2,19 @@ name: test workflow
 on:
   push:
     branches:
-      - "master"
-      - "main"
+      - main
+    paths-ignore:
+      - 'README.md'
   workflow_dispatch:
-
+env:
+  AWS_REGION: us-east-2
 permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read # This is required for actions/checkout
-
-defaults:
-  run:
-    working-directory: ./myfirstcodebase
+  id-token: write
+  contents: read
 
 jobs:
-  to_ecr_pusher:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v2
-      - run: echo "Hello Saksham!"
-        shell: bash
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: arn:aws:iam::947082213778:role/testrole
-          role-session-name: samplerolesession
-          aws-region: us-east-1
-
-      - name: Set Permissions
-        run: chmod +x ./scripts/build-and-push-image-to-ecr.sh
-      
-      - name: Running the Script
-        run: |
-         ./scripts/build-and-push-image-to-ecr.sh
-
-  print_golang:
+  deploy-dev:
+    name: Deploy QS Cron Service - Dev
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
       - run: echo "Hello Golang!"
-
