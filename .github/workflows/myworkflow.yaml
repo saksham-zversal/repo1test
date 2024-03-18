@@ -30,7 +30,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Set Permissions
-        run: sudo chmod +x ./scripts/build-and-push-image-to-ecr.sh
+        run: chmod +x ./Scripts/build-and-push-image-to-ecr.sh
       
       - name: Running the Script
         run: |
