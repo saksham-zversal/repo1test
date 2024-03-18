@@ -6,10 +6,13 @@ on:
     paths-ignore:
       - 'README.md'
   workflow_dispatch:
-    
+
+# defaults:
+#   run:
+#     working-directory: ./myfirstcodebase
 defaults:
   run:
-    working-directory: ./myfirstcodebase
+    working-directory: ./myfirstcodebase/
 permissions:
   id-token: write
   contents: read
