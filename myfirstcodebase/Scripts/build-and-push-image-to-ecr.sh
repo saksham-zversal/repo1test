@@ -9,7 +9,7 @@ aws ecr create-repository \
     --repository-name $Repo_name_for_ecr \
     --region $Region
 
-docker build -t $imagename .
+docker build -t $imagename:$version .
 docker tag $imagename:$version $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo_name_for_ecr
 
 docker push $Aws_account_id.dkr.ecr.region.amazonaws.com/$Repo_name_for_ecr
