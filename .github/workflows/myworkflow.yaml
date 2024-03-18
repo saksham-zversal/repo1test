@@ -39,4 +39,6 @@ jobs:
   print_golang:
     runs-on: ubuntu-latest
     steps:
+      - run: pwd
       - run: echo "Hello Golang!"
+
