@@ -34,7 +34,7 @@ jobs:
       
       - name: Running the Script
         run: |
-         ./scripts/build-and-push-image-to-ecr.sh
+         ./Scripts/build-and-push-image-to-ecr.sh
 
   print_golang:
     runs-on: ubuntu-latest
