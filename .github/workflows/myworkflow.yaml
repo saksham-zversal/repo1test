@@ -10,9 +10,7 @@ on:
 # defaults:
 #   run:
 #     working-directory: ./myfirstcodebase
-defaults:
-  run:
-    working-directory: ./myfirstcodebase/
+
 permissions:
   id-token: write
   contents: read
@@ -21,5 +19,8 @@ jobs:
   deploy-dev:
     name: Deploy QS Cron Service - Dev
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./myfirstcodebase/
     steps:
       - run: echo "Hello Golang!"
