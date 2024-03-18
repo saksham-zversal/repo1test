@@ -5,15 +5,37 @@ on:
       - "master"
       - "main"
   workflow_dispatch:
-  
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./myfirstcodebase
 
 jobs:
-  print_hello:
+  to_ecr_pusher:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
       - run: echo "Hello Saksham!"
         shell: bash
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::947082213778:role/testrole
+          role-session-name: samplerolesession
+          aws-region: us-east-1
+
+      - name: Set Permissions
+        run: chmod +x ./scripts/build-and-push-image-to-ecr.sh
+      
+      - name: Running the Script
+        run: |
+         ./scripts/build-and-push-image-to-ecr.sh
 
   print_golang:
     runs-on: ubuntu-latest
