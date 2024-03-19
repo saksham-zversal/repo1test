@@ -6,6 +6,13 @@ on:
       - "main"
   workflow_dispatch:
 
+env:
+  Region: us-east-1
+  ECR_REPOSITORY: abc-test
+  Aws_account_id: 947082213778
+  version: v1
+  imagename:  facebook_img
+
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read # This is required for actions/checkout
@@ -28,7 +35,15 @@ jobs:
           role-to-assume: arn:aws:iam::947082213778:role/testrole
           role-session-name: samplerolesession
           aws-region: us-east-1
+      - name: Create ECR repo if missing
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || aws ecr create-repository --repository-name $ECR_REPOSITORY
 
+      - name: find IMAGE_TAG
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          echo IMAGE_TAG: $IMAGE_TAG
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
       - name: Set Permissions
         run: chmod +x ./Scripts/build-and-push-image-to-ecr.sh
       
