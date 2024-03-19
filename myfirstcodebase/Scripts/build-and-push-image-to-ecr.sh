@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+IMAGE_TAG=test
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/base.env" set
 
 aws ecr get-login-password --region $Region | docker login --username AWS --password-stdin $Aws_account_id.dkr.ecr.$Region.amazonaws.com
@@ -9,7 +9,7 @@ aws ecr create-repository \
     --region $Region
 
 docker build -t $imagename .
-docker tag "$imagename:latest" $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo_name_for_ecr
+docker tag "$imagename:$IMAGE_TAG" $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo_name_for_ecr
 
 docker push $Aws_account_id.dkr.ecr.region.amazonaws.com/$Repo_name_for_ecr
 
