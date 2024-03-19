@@ -10,7 +10,6 @@ aws ecr create-repository \
 
 docker build -t "$imagename:$version" .
 docker tag "$imagename:$version" $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo_name_for_ecr
-
 docker push $Aws_account_id.dkr.ecr.$Region.amazonaws.com/$Repo_name_for_ecr
 
 # To push an image to the Amazon ECR repository, we need to authenticate the Docker client to the registry. 
