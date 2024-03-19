@@ -12,14 +12,14 @@ permissions:
 
 defaults:
   run:
-    working-directory: ./myfirstcodebase
+    working-directory: ./myfirstcodebase/
 
 jobs:
   to_ecr_pusher:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: echo "Hello Saksham!"
         shell: bash
       - name: configure aws credentials
